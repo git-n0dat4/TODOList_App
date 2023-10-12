@@ -1,0 +1,23 @@
+name: Trabajo Practico 1
+
+on:
+  push:
+    branches:
+      - main # Rama principal
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+  - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 18.16.0 # Versio Node
+  - name: Instalar dependencias
+       run: |
+       npm install
+  - name: Compilar proyecto
+      run: |
+        npm start
+  - name: Ejecutar pruebas unitarias al componente react native
+      run: |
+        npm run test     
