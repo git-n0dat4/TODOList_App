@@ -22,13 +22,10 @@ jobs:
       run: npm install  # Instalar dependencias
 
     - name: Archive artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v2 # Compilar la aplicación
       with:
         name: build
         path: .expo
         
-    - name: Ejecutar la aplicación
-      run: npm start  # Compilar la aplicación
-
     - name: Ejecutar pruebas unitarias
       run: npm run test  # Ejecutar pruebas unitarias al componente react native
