@@ -16,13 +16,16 @@ jobs:
     - name: Configurar Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: 18.16.0  # Cambia esto a la versión de Node.js que estás utilizando en tu proyecto
+        node-version: 18.16.0  # Mi versión de Node.js con la que se ha creado el proyecto
 
     - name: Instalar dependencias
-      run: npm install  # Asegúrate de que este comando sea válido para tu proyecto
+      run: npm install  # Instalar dependencias
 
     - name: Compilar proyecto
-      run: npm start  # Asegúrate de que este comando sea válido para compilar tu proyecto
+      run: npm run build # Compilar proyecto
+
+    - name: Compilar proyecto
+      run: npm start  # Ejecutar proyecto
 
     - name: Ejecutar pruebas unitarias
-      run: npm run test  # Asegúrate de que este comando sea válido para ejecutar las pruebas de tu proyecto React Native
+      run: npm run test  # Ejecutar pruebas unitarias al componente react native
