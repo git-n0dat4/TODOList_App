@@ -22,10 +22,10 @@ jobs:
       run: npm install  # Instalar dependencias
 
     - name: Build for Android
-        run: npx expo build:android
+      run: npx expo build:android
 
     - name: Build for iOS
-        run: npx expo build:ios
+      run: npx expo build:ios
 
     - name: Archive artifacts
       uses: actions/upload-artifact@v2
@@ -34,9 +34,7 @@ jobs:
         path: .expo
         
     - name: Ejecutar la aplicación
-      run: npm start  # Compilar la aplicacion
+      run: npm start  # Compilar la aplicación
 
     - name: Ejecutar pruebas unitarias
       run: npm run test  # Ejecutar pruebas unitarias al componente react native
-
-   
