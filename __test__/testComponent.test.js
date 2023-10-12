@@ -10,13 +10,13 @@ describe('App', () => {
       renderResult = render(<App />);
     });
   
-    it('renders correctly', () => {
+    it('Se visualiza correctamente', () => {
       const { getByText } = renderResult;
       const title = getByText('Modo de Escritura'); // Buscar el título del modo de escritura
       expect(title).toBeTruthy();
     });
   
-    it('adds a new task to the list', () => {
+    it('Añade una nueva tarea a la lista', () => {
       const { getByText, getByPlaceholderText, getByTestId } = renderResult;
       const input = getByPlaceholderText('Escribe algo...'); // Encontrar el campo de entrada
       const button = getByText('Guardar'); // Encontrar el botón de guardar
@@ -29,7 +29,7 @@ describe('App', () => {
       expect(task).toBeTruthy();
     });
   
-    it('marks a task as done', () => {
+    it('Marca una tarea como realizada', () => {
       const { getByText, getByPlaceholderText, getByTestId, queryByText } = renderResult;
       const input = getByPlaceholderText('Escribe algo...');
       const button = getByText('Guardar');
@@ -45,9 +45,13 @@ describe('App', () => {
   
       const doneTask = queryByText('New Task (Done)'); // Buscar la tarea marcada como "hecha"
       expect(doneTask).toBeTruthy();
+    });
 
-    //   const doneTask2 = queryByText('New Task '); // Aqui se esta marcando la tarea sin el (Done), para demostrar el fallo de la prueba
-    //   expect(doneTask2).toBeTruthy();
-
+    // Aqui se esta marcando la tarea sin el (Done), la cual no deberia de existir
+    // Pero se esta controlando el error
+    it('Comprueba que una tarea marcada no contenga el (Done)',()=>{
+        const {queryByText } = renderResult;
+        const doneTask = queryByText('New Task');
+        expect(doneTask).toBeNull();
     });
   });

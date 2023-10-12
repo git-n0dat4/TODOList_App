@@ -8,11 +8,8 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
+import { contienePalabrasConInicialesMayusculas } from './funciones';
 
-function contienePalabrasConInicialesMayusculas(cadena) {
-  const palabras = cadena.split(" ");
-  return palabras.every((palabra) => /^[A-Z][a-z]*$/.test(palabra));
-}
 export default function App() {
   const [text, setText] = useState("");
   const [unitTestResults, setUnitTestResults] = useState("");
@@ -22,15 +19,12 @@ export default function App() {
 
   const handleSaveText = () => {
     setText(text);
-
     if (contienePalabrasConInicialesMayusculas(text)) {
       setUnitTestResults(
         "El texto cumple con la prueba unitaria: contiene palabras con iniciales en mayúsculas."
       );
-
       // Guardar el texto si pasa la prueba unitaria
       setSavedText(text);
-
       // Agregar el texto como una tarea al To-Do List
       setTodoList((prevTodoList) => [...prevTodoList, text]);
     } else {
@@ -42,15 +36,27 @@ export default function App() {
 
   const toggleItem = (index) => {
     // Marcar o desmarcar un elemento en el To-Do List
-    setMarkedItems((prevMarkedItems) =>
-      prevMarkedItems.includes(index)
+    setMarkedItems((prevMarkedItems) => {
+      const isAlreadyMarked = prevMarkedItems.includes(index);
+      const updatedMarkedItems = isAlreadyMarked
         ? prevMarkedItems.filter((item) => item !== index)
-        : [...prevMarkedItems, index]
-    );
-    // Además, actualiza el estado de la tarea como "hecha" en tu estructura de datos
-    const updatedTodoList = [...todoList];
-    updatedTodoList[index] = todoList[index] + " (Done)";
-    setTodoList(updatedTodoList);
+        : [...prevMarkedItems, index];
+  
+      // Actualizar el estado de las tareas
+      const updatedTodoList = todoList.map((item, itemIndex) => {
+        if (itemIndex === index) {
+          if (isAlreadyMarked && item.endsWith('(Done)')) {
+            return item.substring(0, item.length - 7);
+          } else {
+            return `${item} (Done)`;
+          }
+        }
+        return item;
+      });
+  
+      setTodoList(updatedTodoList);
+      return updatedMarkedItems;
+    });
   };
 
   return (
@@ -63,10 +69,6 @@ export default function App() {
           onChangeText={(newText) => setText(newText)}
         />
         <Button title="Guardar" onPress={handleSaveText} />
-      </View>
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>Resultados de Pruebas Unitarias</Text>
-        <Text>{unitTestResults}</Text>
       </View>
       <View style={styles.card}>
         <Text style={styles.cardTitle}>To-Do List</Text>
@@ -85,6 +87,10 @@ export default function App() {
           keyExtractor={(item, index) => index.toString()}
         />
       </View>
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>Resultados de Pruebas Unitarias</Text>
+        <Text>{unitTestResults}</Text>
+      </View>
     </View>
   );
 }
@@ -92,23 +98,23 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    justifyContent: "center",
+    alignItems: "center",
   },
   card: {
-    backgroundColor: 'white',
-    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "gray",
     padding: 16,
-    marginVertical: 8,
-    elevation: 3,
+    margin: 16,
   },
   cardTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   input: {
-    borderBottomWidth: 1,
-    borderColor: 'gray',
-    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: "gray",
+    marginBottom: 8,
     padding: 8,
   },
   todoItem: {
