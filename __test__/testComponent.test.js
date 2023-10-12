@@ -46,8 +46,8 @@ describe('App', () => {
       const doneTask = queryByText('New Task (Done)'); // Buscar la tarea marcada como "hecha"
       expect(doneTask).toBeTruthy();
 
-    //  const doneTask2 = queryByText('New Task '); // Aqui se esta marcando la tarea sin el (Done), para demostrar el fallo de la prueba
-    //  expect(doneTask2).toBeTruthy();
+      const doneTask2 = queryByText('New Task '); // Aqui se esta marcando la tarea sin el (Done), para demostrar el fallo de la prueba
+      expect(doneTask2).toBeTruthy();
 
     });
   });

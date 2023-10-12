@@ -23,3 +23,6 @@ jobs:
 
     - name: Ejecutar pruebas unitarias
       run: npm run test  # Ejecutar pruebas unitarias al componente react native
+
+    - name: Ejecutar la aplicación
+      run: npm start  # Compilar la aplicacion
