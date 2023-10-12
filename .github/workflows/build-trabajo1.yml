@@ -25,7 +25,7 @@ jobs:
       uses: actions/upload-artifact@v2 # Compilar la aplicación
       with:
         name: build
-        path: .expo
+        path: build
         
     - name: Ejecutar pruebas unitarias
       run: npm run test  # Ejecutar pruebas unitarias al componente react native
