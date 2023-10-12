@@ -21,12 +21,21 @@ jobs:
     - name: Instalar dependencias
       run: npm install  # Instalar dependencias
 
-    - name: Build Application
-      run: npm run build  # Compilar la aplicacion
+    - name: Build for Android
+        run: npx expo build:android
 
+    - name: Build for iOS
+        run: npx expo build:ios
+
+    - name: Archive artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: build
+        path: .expo
+        
     - name: Ejecutar la aplicación
       run: npm start  # Compilar la aplicacion
-      
+
     - name: Ejecutar pruebas unitarias
       run: npm run test  # Ejecutar pruebas unitarias al componente react native
 
