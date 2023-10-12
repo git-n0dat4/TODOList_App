@@ -21,8 +21,5 @@ jobs:
     - name: Instalar dependencias
       run: npm install  # Instalar dependencias
 
-    - name: Compilar proyecto
-      run: npm start  # Ejecutar proyecto
-
     - name: Ejecutar pruebas unitarias
       run: npm run test  # Ejecutar pruebas unitarias al componente react native
