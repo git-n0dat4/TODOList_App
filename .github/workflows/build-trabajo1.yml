@@ -21,12 +21,6 @@ jobs:
     - name: Instalar dependencias
       run: npm install  # Instalar dependencias
 
-    - name: Build for Android
-      run: npx eas build -p android
-
-    - name: Build for iOS
-      run: npx eas build -p ios
-
     - name: Archive artifacts
       uses: actions/upload-artifact@v2
       with:
